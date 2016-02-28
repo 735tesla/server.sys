@@ -1,12 +1,17 @@
-
-var Client = function(name, uuid) {
-	this.name = name;
-	this.uuid = uuid;
-
-	console.log('INSERT INTO clients (name, uuid) VALUES(\'' + this.name + '\', \'' + this.uuid + '\')');
-	db.run('INSERT INTO clients (name, uuid) VALUES(\'' + this.name + '\', \'' + this.uuid + '\')');
-
-	db.close();
-};
+var Client = sequelize.define('client', {
+		uuid: {
+			type: Sequelize.STRING,
+			field: 'uuid',
+			unique: true,
+			allowNull: false
+		},
+		name: {
+			type: Sequelize.STRING,
+			field: 'name',
+			defaultValue: '(unnamed)'
+		}
+}, {
+	underscored: true
+});
 
 module.exports = Client;
